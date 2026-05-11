@@ -1,6 +1,5 @@
 """Spa."""
 import random
-# Суть этого рандома заключается в том, чтобы выбирать что-то на рандом
 
 
 # Exercise 1: Generate Spa Menu Prices
@@ -16,7 +15,6 @@ def generate_menu_prices(services: list) -> list:
     :return: list of service prices
     """
     return [[service, random.randint(30, 150)] for service in services]
-    # Радиант выбирает между 30 и 150 цену
 
 
 # Exercise 2: Create Spa Appointment Slots
@@ -93,18 +91,6 @@ def generate_employee_schedules(employees: list, working_hours: list) -> list:
     :return: list of employee schedules
     """
     return [[employee] + [random.choice(working_hours) for _ in range(5)] for employee in employees]
-    # Тут так, чтобы random.choice() выбирает на рандом working hours.
-
-
-"""
-random.choice
-Выбор: Выбирает один элемент из последовательности.
-Повторения: Может выбирать один и тот же элемент несколько раз.
-
-random.sample
-Выбор: Выбирает несколько уникальных элементов из последовательности.
-Повторения: Не может выбирать один и тот же элемент более одного раза.
-"""
 
 
 # Exercise 6: Spa Product Inventory
@@ -163,19 +149,6 @@ def generate_product_scents(product_types: list, scents: list) -> list:
     :return: list of paired product and scent combinations
     """
     return [[product_type, scent] for product_type in product_types for scent in scents]
-
-
-"""
-return [[product_type, scent] for product_type in product_types for scent in scents]
-Создает все возможные комбинации каждого типа продукта с каждым ароматом.
-Результат: Если product_types содержит 2 элемента, а scents — 3, то будет создано 6 пар (2 × 3).
-
-return [[product_type, scent] for product_type, scent in zip(product_types, scents)]
-Создает пары, используя элементы из обоих списков по их индексам. Если один из списков короче,
-то лишние элементы из более длинного списка игнорируются.
-Результат: Если product_types содержит 2 элемента, а scents — 3, то будет создано только 2 пары
-(по количеству элементов в более коротком списке).
-"""
 
 
 # Exercise 8: Identify VIP Customers
