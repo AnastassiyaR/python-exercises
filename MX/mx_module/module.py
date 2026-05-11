@@ -40,8 +40,6 @@ class MovieData:
         self.ratings = pd.read_csv(ratings_filename)
         self.tags = pd.read_csv(tags_filename)
 
-        # pd.read_csv(movies_filename): Эта функция из библиотеки pandas загружает данные из CSV файла,
-        # путь к которому передан в переменной movies_filename.
 
     def remove_cols(self, df: pd.DataFrame, columns: list) -> pd.DataFrame:
         """
@@ -53,23 +51,6 @@ class MovieData:
         """
         return df.drop(labels=columns, axis=1)
 
-    """
-    df.drop(...)
-    df: Это входной параметр метода, который представляет собой объект pandas.DataFrame. Он содержит данные,
-    из которых мы хотим удалить столбцы.
-    .drop(...): Это метод pandas, который используется для удаления указанных строк или столбцов из датафрейма.
-
-    2. labels=columns
-    labels: Это параметр метода drop, который принимает список меток (имен) строк или столбцов, которые нужно удалить.
-    columns: Это входной параметр метода remove_cols, который представляет собой список имен столбцов,
-    которые мы хотим удалить из датафрейма df.
-
-    3. axis=1
-    axis: Этот параметр указывает, по какому измерению нужно выполнять операцию удаления.
-    axis=0 означает, что мы хотим удалить строки (по индексу).
-    axis=1 означает, что мы хотим удалить столбцы (по именам столбцов).
-    В данном случае, поскольку мы хотим удалить столбцы, мы указываем axis=1.
-    """
 
     def merge_col_string_on_key(self, df: pd.DataFrame, key: str, col: str) -> pd.DataFrame:
         """
@@ -82,25 +63,6 @@ class MovieData:
         """
         return df.groupby(key).agg({col: lambda x: ' '.join(x)}).reset_index()
 
-    """
-    1. df.groupby(key)
-    df: Это входной параметр метода, который представляет собой объект pandas.DataFrame.
-    .groupby(key): Этот метод группирует строки датафрейма по уникальным значениям в столбце,
-    указанном в переменной key. Например, если key равен 'movieId',
-    то все строки с одинаковым movieId будут сгруппированы вместе.
-
-    2. .agg({col: lambda x: ' '.join(x)})
-    .agg(...): Этот метод применяется к сгруппированным данным и позволяет выполнять агрегирующие операции.
-    {col: lambda x: ' '.join(x)}: Здесь мы указываем,
-    что для столбца col (например, tag) мы хотим объединить все значения в одну строку, разделенную пробелами.
-    lambda x: ' '.join(x): Это анонимная функция, которая принимает серию значений x и объединяет их в одну строку,
-    разделяя пробелами. Например, если у нас есть теги ['funny', 'animated', 'family'],
-    то результатом будет строка 'funny animated family'.
-
-    3. .reset_index()
-    .reset_index(): Этот метод сбрасывает индекс датафрейма, создавая новый индекс для результирующего датафрейма.
-    Это полезно, чтобы вернуть датафрейм в стандартный формат, где индексы начинаются с 0.
-    """
 
     def create_aggregate_movie_dataframe(self, nan_placeholder: str = '') -> None:
         """
@@ -122,21 +84,6 @@ class MovieData:
         self.aggregate_movie_dataframe = self.aggregate_movie_dataframe.merge(self.tags, on='movieId', how='left')
         self.aggregate_movie_dataframe['tag'] = self.aggregate_movie_dataframe['tag'].fillna(nan_placeholder)
 
-    """
-    self.movies: Это датафрейм, который содержит информацию о фильмах.
-    .merge(...): Этот метод объединяет два датафрейма.
-
-    on='movieId': Мы объединяем данные по столбцу movieId, который должен присутствовать в обоих датафреймах.
-
-    how='left': Это означает, что мы хотим сохранить все строки из self.movies и
-    добавить соответствующие строки из self.ratings. Если для какого-то фильма нет оценок,
-    в результирующем датафрейме будут NaN (пустые значения).
-
-    Теперь мы добавляем теги (self.tags) к уже объединенным данным о фильмах и оценках, снова используя movieId как ключ.
-    Опять же, если у фильма нет тегов, в соответствующих местах будет NaN.
-
-    Мы заменяем все пустые значения в столбце tag на значение, указанное в nan_placeholder (например, 'Нет тегов').
-    """
 
     def get_movies_dataframe(self) -> pd.DataFrame:
         """
@@ -185,7 +132,6 @@ class MovieFilter:
         Here we only need to store the aggregate dataframe from MovieData class.
         """
         self.movie_data = pd.DataFrame()
-        # Запомни это pd!!!
 
     def set_movie_data(self, movie_data: pd.DataFrame) -> None:
         """
@@ -234,30 +180,7 @@ class MovieFilter:
         if genre is None or genre.strip() == "":
             raise ValueError("Genre must be a non-empty string")
 
-        # Фильтрация по жанру
         return self.movie_data[self.movie_data['genres'].str.contains(genre, case=False)]
-
-    """
-    self.movie_data['genres']: Здесь мы обращаемся к столбцу genres в DataFrame.
-
-    Метод str.contains(genre, case=False) выполняет следующее:
-
-    Проверяет, содержится ли подстрока genre в каждой строке столбца genres:
-    Это значит, что он ищет, есть ли указанный жанр (например, "Action") в жанрах фильмов.
-
-    Параметр case=False: Указывает, что поиск не должен учитывать регистр.
-    То есть "Action", "action" и "ACTION" будут считаться одинаковыми.
-
-    Пример
-    Если у вас есть столбец genres с такими значениями:
-
-    "Action, Comedy"
-    "Drama"
-    "action, Thriller"
-    "Horror"
-    И вы ищете genre = "action", то str.contains("action", case=False) вернет True для первых и третьих строк,
-    потому что "Action" и "action" присутствуют в этих строках, независимо от регистра.
-    """
 
     def filter_movies_by_tag(self, tag: str) -> pd.DataFrame:
         """
