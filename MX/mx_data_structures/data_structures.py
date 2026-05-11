@@ -76,21 +76,13 @@ def set_operations(set1, set2, result_dict) -> dict:
     """
     print(set1, set2, result_dict)
     result_dict['union'] = set1.union(set2)
-    # Метод union() возвращает новое множество,
-    # содержащее все уникальные элементы из обоих множеств.
 
     result_dict['intersection'] = set1.intersection(set2)
-    # Метод intersection() возвращает новое множество,
-    # содержащее только те элементы, которые присутствуют в обоих множествах.
 
     result_dict['difference'] = set1.difference(set2)
-    # Метод difference() возвращает новое множество,
-    # содержащее элементы, которые есть в set1, но отсутствуют в set2.
 
     result_dict['symmetric_difference'] = set1.symmetric_difference(set2)
-    # Метод symmetric_difference() возвращает новое множество,
-    # содержащее элементы, которые есть в одном из множеств,
-    # но отсутствуют в другом.
+ 
     return result_dict
 
 
@@ -180,7 +172,6 @@ def tuple_of_tuples(lst) -> tuple:
     """
     print(lst)
     return tuple(tuple([item]) for item in lst)
-    # Обрати внимание, что пишем [item] из-за чисел!!!!!!
 
 
 def element_exists(lst1, dict1, set1, tuple1, element) -> bool:
