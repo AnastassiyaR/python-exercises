@@ -214,25 +214,6 @@ def determine_plant_health(plants: list, watering_frequency: dict, sunlight_hour
     }
 
 
-"""
-"морж" (:=), также известный как оператор присваивания выражения,
-позволяет вам присваивать значение переменной и использовать это значение в одном и том же выражении.
-
-Пример
-lines = [
-    "Hello",
-    "This is a longer line",
-    "Short",
-    "Another long line here"
-]
-
-# Использование оператора "морж"
-for line in lines:
-    if (length := len(line)) > 10:
-        print(f"Длина строки '{line}' составляет {length}.")
-"""
-
-
 def calculate_health_score(plant: str, watering_frequency: int, sunlight_hours: float, pest_infestation: bool) -> float:
     """
     Calculate the health score of a plant based on watering frequency, sunlight hours, and pest infestation.
