@@ -47,7 +47,6 @@ def sort_cars_by_make(cars: list[Car]) -> list[Car]:
     :return: The sorted list of cars.
     """
     return sorted(cars, key=lambda car: (car.make, car.model))
-    # return list(map(lambda car: (car[0], car[1]), cars))  это неверно, так как речь идет про объекты
 
 
 def find_cars_by_make_and_model(cars: list[Car], make: str, model: str) -> list[Car]:

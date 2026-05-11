@@ -9,7 +9,7 @@ def mesh_two_list_to_csv_file(list1: list, list2: list, filename: str):
 
     Both lists have the same number of rows. Make two lists into one without disarranging any row or column.
     """
-    combined_rows = zip(list1, list2)  # два в один
+    combined_rows = zip(list1, list2)
     with open(filename, 'w', newline='') as file:
         writer = csv.writer(file)
         writer.writerows(combined_rows)
@@ -28,7 +28,7 @@ def replace_vowels_in_file(input_file: str, output_file: str):
 
         with open(output_file, 'w', newline='') as new_file:
             for line in reader:  # line and reader are lists!!!
-                for word in line:  # поэтому еще в sõna
+                for word in line:
                     result = ''.join(map(lambda char: '*' if char in vowels else char, word))
                     new_file.write(result)  # write() argument must be str, not list
 
@@ -41,7 +41,7 @@ def reverse_rows_in_csv_file(input_file: str, output_file: str):
     output CSV file with the rows in reverse order.
     """
     with open(input_file, 'r') as file:
-        reader = list(csv.reader(file))  # типо выглядит [ [..], [...] ]
+        reader = list(csv.reader(file))
 
         with open(output_file, 'w', newline='') as newfile:
             writer = csv.writer(newfile)

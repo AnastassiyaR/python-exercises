@@ -105,7 +105,7 @@ class Router:
 
         self.subnet = ip_address[:-2]  # network id_address
         self.used_ip_addresses = []  # host id_address
-        self.devices = []  # все компы в роуторе
+        self.devices = []  # devices in router
 
     def get_ip_address(self) -> str:
         """Return the current IP address of the router."""

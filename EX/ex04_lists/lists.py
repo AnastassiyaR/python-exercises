@@ -22,7 +22,6 @@ def phone_brands(all_phones: str) -> list:
     if not all_phones:
         return []
     result = all_phones.split(",")
-    # print("r", result)
     new = []
     for i in result:
         # join is used to make from list to string

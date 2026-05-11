@@ -119,7 +119,7 @@ def check_for_prime(num: int, i=2) -> bool:
     if num <= 1:
         return False
 
-    if i * i > num:  # Это надо запомнить. Если 36 > 29 (i = 6), то значит это простое
+    if i * i > num:
         return True
 
     if num % i == 0:

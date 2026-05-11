@@ -50,7 +50,7 @@ def find_sentences(text: str) -> list:
     :param text: given string to find sentences from
     :return: list of sentences found in given string
     """
-    pattern = r'[A-ZÄÖÕÜ][^.!?]*[.!?]+'  # [^. ]любой символ, кроме
+    pattern = r'[A-ZÄÖÕÜ][^.!?]*[.!?]+'
     return re.findall(pattern, text)
 
 
@@ -89,7 +89,7 @@ def find_words_from_sentences_only(text: str) -> list:
     for sentence in right_sentences:
         words = re.findall(pattern_for_words, sentence)
         # print("words", words)
-        all_words += words  # words это list, поэтому можешь просто +
+        all_words += words
 
     return all_words
 
@@ -111,7 +111,6 @@ def find_years(text: str) -> list:
     """
     pattern = r'(?<!\d)\d{4}(?!\d)'
     years_string = re.findall(pattern, text)
-    #print("aa", years_string)
     return [int(year) for year in years_string]
 
 

@@ -37,18 +37,17 @@ def control_number(encrypted_string: str) -> bool:
     digit_quantity = 0
     for i in str(result):
         digit_quantity += 1
-    # print("d", digit_quantity)
+    # print("digit_quantity", digit_quantity)
 
     # Find number
     from_number = -1 * digit_quantity
-    # print("f", from_number)
+    # print("from_number", from_number)
 
     control = encrypted_string[from_number:]
     # print("control", control)
 
     # CHECK
     # print(control, result)
-    # panna str() since "r9"
     if str(control) == str(result):
         return True
     else:

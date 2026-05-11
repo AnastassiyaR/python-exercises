@@ -42,7 +42,7 @@ def parse(row: str) -> tuple:
     # Phone number
     pattern_phone_numbers = r'\d{11}?(\+\d{3}\s?|\s|)(\d{7,8})'
     # r'(\+\d{3}?\s?\d{7,8})', '(\+\d{3}\s?|\s)(\d{7,8})'
-    # print("SyyO", re.findall(pattern_phone_numbers, row))
+    # print("res", re.findall(pattern_phone_numbers, row))
     match_phone_numbers = re.search(pattern_phone_numbers, row)
     if match_phone_numbers:
         match = ''.join(match_phone_numbers.groups()).strip()
@@ -54,7 +54,7 @@ def parse(row: str) -> tuple:
     # Date
     pattern_date = r'(\d{2}-\d{2}-\d{4})'
     match_date = re.search(pattern_date, row)
-    # print("SO", match_date)
+    # print("match_date", match_date)
     if match_date:
         result += match_date.groups()
     else:
